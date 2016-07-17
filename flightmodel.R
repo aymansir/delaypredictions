@@ -2,6 +2,7 @@
 # PART 1 CLEANING DATA
 # Import flights dataset after dowloading from the TSA website
 
+library(readr)
 setwd("~/Google Drive/ix 2016 /Project3")
 flights <- read.csv2('flights.csv', sep=",", header=TRUE, stringsAsFactors = FALSE)
 View(flights)
@@ -18,25 +19,26 @@ flights$ORIGIN_AIRPORT_SEQ_ID <- NULL
 flights$DEST_AIRPORT_SEQ_ID <- NULL 
 flights$UNIQUE_CARRIER <- NULL
 
+# exploratory data analysis
+
 # Group flights 
 
 ontime <- flights[!is.na(flights$ARR_DEL15) & flights$ARR_DEL15!="" & !is.na(flights$DEP_DEL15) & flights$DEP_DEL15!="",]
 
 # Change data type to run model
 
-ontime$DISTANCE <- as.integer(ontime$DISTANCE)
-ontime$CANCELLED <- as.integer(ontime$CANCELLED)
-ontime$DIVERTED <- as.integer(ontime$DIVERTED)
-
-ontime$ARR_DEL15 <- as.factor(ontime$ARR_DEL15)
-ontime$DEP_DEL15 <-as.factor(ontime$DEP_DEL15)
 ontime$DEST_AIRPORT_ID <- as.factor(ontime$DEST_AIRPORT_ID)
 ontime$ORIGIN_AIRPORT_ID <- as.factor(ontime$ORIGIN_AIRPORT_ID)
 ontime$DAY_OF_WEEK <- as.factor(ontime$DAY_OF_WEEK)
-ontime$DEST <- as.factor(ontime$DEST)
+ontime$DISTANCE <- as.integer(ontime$DISTANCE)
+ontime$CANCELLED <- as.integer(ontime$CANCELLED)
+ontime$DIVERTED <- as.integer(ontime$DIVERTED)
 ontime$ORIGIN <- as.factor(ontime$ORIGIN)
 ontime$DEP_TIME_BLK <- as.factor(ontime$DEP_TIME_BLK)
 ontime$CARRIER <- as.factor(ontime$CARRIER)
+ontime$ARR_DEL15 <- as.factor(ontime$ARR_DEL15)
+ontime$DEP_DEL15 <-as.factor(ontime$DEP_DEL15)
+ontime$DEST <- as.factor(ontime$DEST)
 
 # PART 2: TRAINING DATA
 
